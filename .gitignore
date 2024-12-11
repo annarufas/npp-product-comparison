@@ -1,0 +1,7 @@
+resources/external/*/
+README_cover.png
+figures/*.pdf
+code/*.asv
+data/processed/*.mat
+data/raw/*.mat
+.DS_Store
