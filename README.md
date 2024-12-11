@@ -1,15 +1,15 @@
 ## Comparison of Net Primary Production (NPP) Products with In Situ Data from Time-Series Locations
 
-![npp_c14_vs_models](https://private-user-images.githubusercontent.com/128830450/394737913-6f3f7a7b-4a02-4230-8b90-28ff1a909ad8.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzM5MjAyMTcsIm5iZiI6MTczMzkxOTkxNywicGF0aCI6Ii8xMjg4MzA0NTAvMzk0NzM3OTEzLTZmM2Y3YTdiLTRhMDItNDIzMC04YjkwLTI4ZmYxYTkwOWFkOC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMjExJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTIxMVQxMjI1MTdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1jZmQ2YjhiZDFhMmIzYTg4MzBlN2I0MTg5NGEzNTRlNTQ3MDBlMGEyZDYzNGRiOTBkNGEzODhjZWU2ZmIxYTUwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.z4w8OJFykePP_G5EFshY5fg90oe3sH7Cx1yJK7eapeA)
-
 This repository contains a collection of MATLAB scripts developed to evaluate and compare net primary production (NPP) models against *in situ* data. The scripts process, format and visualise freely-available NPP products for the global ocean and compare them with *in situ* oceanographic data from time-series stations using the <sup>14</sup>C technique, enabling the identification of the most optimal model based on this comparison. The workflow addresses the often-overlooked task of systematically assessing multiple existing biogeochemical forcing products for ocean models.
 
 The analysed NPP datasets include: 
-- Carbon, Absorption, and Fluorescence Euphotic-resolving ([**CAFE**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.cafe.m.php)) model
-- Carbon-based Production Model ([**CbPM**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.cbpm2.m.php))
-- Vertically Generalized Production Model ([**VGPM**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.vgpm.m.chl.m.sst.php))
+- Carbon, Absorption, and Fluorescence Euphotic-resolving ([**CAFE**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.cafe.m.php)) model.
+- Carbon-based Production Model ([**CbPM**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.cbpm2.m.php)).
+- Vertically Generalized Production Model ([**VGPM**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.vgpm.m.chl.m.sst.php)).
 - **Carr ([2002](https://doi.org/10.1016/S0967-0645(01)00094-7)) model**
-- ESA Biological Pump and Carbon Exchange Processes ([**BICEP**](https://catalogue.ceda.ac.uk/uuid/69b2c9c6c4714517ba10dab3515e4ee6/)) project model
+- ESA Biological Pump and Carbon Exchange Processes ([**BICEP**](https://catalogue.ceda.ac.uk/uuid/69b2c9c6c4714517ba10dab3515e4ee6/)) project model.
+
+![npp_c14_vs_models](https://private-user-images.githubusercontent.com/128830450/394737913-6f3f7a7b-4a02-4230-8b90-28ff1a909ad8.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzM5MjAyMTcsIm5iZiI6MTczMzkxOTkxNywicGF0aCI6Ii8xMjg4MzA0NTAvMzk0NzM3OTEzLTZmM2Y3YTdiLTRhMDItNDIzMC04YjkwLTI4ZmYxYTkwOWFkOC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMjExJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTIxMVQxMjI1MTdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1jZmQ2YjhiZDFhMmIzYTg4MzBlN2I0MTg5NGEzNTRlNTQ3MDBlMGEyZDYzNGRiOTBkNGEzODhjZWU2ZmIxYTUwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.z4w8OJFykePP_G5EFshY5fg90oe3sH7Cx1yJK7eapeA)
 
 ## Requirements
 
