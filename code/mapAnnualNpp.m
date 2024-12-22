@@ -1,11 +1,11 @@
 function mapAnnualNpp(filenameModelledNpp,filenameModelledNppProcessed)
-    
+
     nNppModels = length(filenameModelledNpp);
     
     load(fullfile('data','processed',filenameModelledNppProcessed),...
         'globalNppStockSummary','nppModelClimatologyStruct')
     
-    myColorScheme = [ones(1,3); jet(1000)];
+    myColourScheme = [ones(1,3); jet(1000)];
     caxismin = 0; % mg C m-2 d-2
     caxismax = 1000; % mg C m-2 d-2
     cbString = 'NPP (mg C m^{-2} d^{-1})';
@@ -16,8 +16,10 @@ function mapAnnualNpp(filenameModelledNpp,filenameModelledNppProcessed)
     qLon = linspace(-180,180,360); % query points for interpolation
     [qX, qY, qT] = ndgrid(qLat, qLon, 1:12); % query grid with 12 time steps
 
-    % Output annual array
-    nppModelledAnnualMean = NaN(numel(qLat),numel(qLon),nNppModels*3);
+    % Output annual arrays
+    nppModelledAnnualMeanAll = NaN(numel(qLat),numel(qLon),nNppModels*3);
+    nppModelledAnnualMeanPlain = NaN(numel(qLat),numel(qLon),nNppModels);
+    globalNppStockSummaryPlain = cell(nNppModels,1);
 
     counter = 1;
     for iModel = 1:nNppModels 
@@ -40,14 +42,25 @@ function mapAnnualNpp(filenameModelledNpp,filenameModelledNppProcessed)
             qNppAvg = squeeze(Favg(qX, qY, qT));
 
             % Compute the annual mean and store in the output array
-            nppModelledAnnualMean(:,:,counter) = mean(qNppAvg,3,'omitnan');
+            nppModelledAnnualMeanAll(:,:,counter) = mean(qNppAvg,3,'omitnan');
+            
+            if (iMethod == 1)
+                nppModelledAnnualMeanPlain(:,:,iModel) = mean(qNppAvg,3,'omitnan');
+                titleStr = strrep(globalNppStockSummary{counter}, ' plain', '');
+                globalNppStockSummaryPlain{iModel} = titleStr;
+            end
+            
             counter = counter + 1;
-
+            
         end % iMethod
     end % iModel
 
-    % Plot the annual mean data using the custom plotting function
-    plotOceanVariableMaps(nppModelledAnnualMean,qLon,qLat,myColorScheme,cbString,...
-        caxismin,caxismax,isCommonColourBar,globalNppStockSummary,'npp_annual',[])
+    % Plot the annual mean data for all methods using the custom plotting function
+    plotOceanVariableMaps(nppModelledAnnualMeanAll,qLon,qLat,myColourScheme,cbString,...
+        caxismin,caxismax,isCommonColourBar,globalNppStockSummary,'npp_annual_interp_comp',[])
+    
+    % Plot the annual mean data for plain data using the custom plotting function
+    plotOceanVariableMaps(nppModelledAnnualMeanPlain,qLon,qLat,myColourScheme,cbString,...
+        caxismin,caxismax,isCommonColourBar,globalNppStockSummaryPlain,'npp_annual',[])
 
 end % mapAnnualNpp
