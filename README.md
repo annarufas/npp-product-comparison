@@ -1,6 +1,6 @@
 ## Comparison of Net Primary Production (NPP) Models with In Situ Observations at four Data-Rich, Time-Series Locations
 
-![npp_models](https://github.com/user-attachments/assets/4173b715-c0d4-4c72-a9c5-490e20bba098)
+![npp_annual](https://github.com/user-attachments/assets/b54c53ec-393a-429d-85d1-9a1aa3d27ca1)
 
 This repository contains a collection of MATLAB scripts developed to evaluate and compare net primary production (NPP) models against *in situ* data. The scripts process, format and visualise freely-available NPP model-derived products for the global ocean and compare them with *in situ* oceanographic data from four time-series locations using the <sup>14</sup>C technique, enabling the identification of the most optimal NPP model based on this comparison. The workflow addresses the often-overlooked task of systematically assessing multiple existing datasets used for forcing/calibrating/validating ocean biogeochemical models.
 
@@ -8,7 +8,7 @@ The analysed NPP datasets include:
 - Carbon, Absorption, and Fluorescence Euphotic-resolving ([**CAFE**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.cafe.m.php)) model.
 - Carbon-based Production Model ([**CbPM**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.cbpm2.m.php)).
 - Vertically Generalized Production Model ([**VGPM**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.vgpm.m.chl.m.sst.php)).
-- **Carr ([2002](https://doi.org/10.1016/S0967-0645(01)00094-7))** model
+- Carr ([**2002**](https://doi.org/10.1016/S0967-0645(01)00094-7)) model
 - ESA Biological Pump and Carbon Exchange Processes ([**BICEP**](https://catalogue.ceda.ac.uk/uuid/69b2c9c6c4714517ba10dab3515e4ee6/)) project model.
 
 ## Requirements
@@ -30,7 +30,7 @@ To use the content of this repository, ensure you have the following.
 
 ## Obtaining Raw Data
 
-Raw NPP model-derived data products were obtained as `.nc` files from the repositories corresponding to the five models listed above. These files were then processed using scripts in in this related [repository](https://github.com/annarufas/ocean-data-lab) (not included here due to size constraints), resulting in the generation of the following five `.mat` files: `npp_cafe_modis.mat`, `npp_cbpm_modis.mat`, `npp_vgpm_modis.mat`, `npp_carr2002_aquamodis_pathfinder_zeuc02.mat`, `npp_bicep.mat`. Once generated, please place them under the `./data/raw/` directory.
+Raw NPP model-derived data products were obtained as `.nc` files from the repositories corresponding to the five models listed above. These files were then processed using scripts in in this related [repository](https://github.com/annarufas/ocean-data-lab) (not included here due to size constraints), resulting in the generation of the following five `.mat` files: `npp_cafe_modis.mat`, `npp_cbpm_modis.mat`, `npp_vgpm_modis.mat`, `npp_carr2002_modis_pathfinder_zeuc02.mat`, `npp_bicep.mat`. Once generated, please place them under the `./data/raw/` directory.
 
 ## MATLAB Scripts
 
