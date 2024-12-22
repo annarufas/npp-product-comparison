@@ -1,6 +1,6 @@
-## Comparison of Net Primary Production (NPP) Products with In Situ Data from Time-Series Locations
+## Comparison of Net Primary Production (NPP) Models with In Situ Observations at four Data-Rich, Time-Series Locations
 
-This repository contains a collection of MATLAB scripts developed to evaluate and compare net primary production (NPP) models against *in situ* data. The scripts process, format and visualise freely-available NPP products for the global ocean and compare them with *in situ* oceanographic data from time-series stations using the <sup>14</sup>C technique, enabling the identification of the most optimal model based on this comparison. The workflow addresses the often-overlooked task of systematically assessing multiple existing biogeochemical forcing products for ocean models.
+This repository contains a collection of MATLAB scripts developed to evaluate and compare net primary production (NPP) models against *in situ* data. The scripts process, format and visualise freely-available NPP products for the global ocean and compare them with *in situ* oceanographic data from four time-series locations using the <sup>14</sup>C technique, enabling the identification of the most optimal model based on this comparison. The workflow addresses the often-overlooked task of systematically assessing multiple existing biogeochemical products used for forcing/calibrating/validating ocean models.
 
 The analysed NPP datasets include: 
 - Carbon, Absorption, and Fluorescence Euphotic-resolving ([**CAFE**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.cafe.m.php)) model.
@@ -28,9 +28,13 @@ To use the content of this repository, ensure you have the following.
     - `./internal/`: custom MATLAB functions generated specifically for calculating and plotting (*provided*).
 - `./figures/`: figures generated from processed data (*provided*).
 
+## Data Sources
+
+The NPP datasets used in this repository are sourced from the following open-access resources:
+
 ## Obtaining Raw Data
 
-Raw NPP model data were obtained as `.nc` files from the repositories corresponding to the five models listed above. These files were then processed using scripts in in this related [repository](https://github.com/annarufas/ocean-data-lab) (not included here due to size constraints), resulting in the generation of the following five `.mat` files: `npp_cafe_modis.mat`, `npp_cbpm_modis.mat`, `npp_vgpm_modis.mat`, `npp_carr2002_seawifs_pathfinder.mat`, `npp_bicep.mat`. Once generated, please place them under the `./data/raw/` directory.
+Raw NPP model data were obtained as `.nc` files from the repositories corresponding to the five models listed above. These files were then processed using scripts in in this related [repository](https://github.com/annarufas/ocean-data-lab) (not included here due to size constraints), resulting in the generation of the following five `.mat` files: `npp_cafe_modis.mat`, `npp_cbpm_modis.mat`, `npp_vgpm_modis.mat`, `npp_carr2002_aquamodis_pathfinder_zeuc02.mat`, `npp_bicep.mat`. Once generated, please place them under the `./data/raw/` directory.
 
 ## MATLAB Scripts
 
@@ -48,9 +52,9 @@ Raw NPP model data were obtained as `.nc` files from the repositories correspond
 ## Reproducibility
 
 The provided scripts perform a matchup analysis using *in situ* data from the following study sites:
+- US JGOFS Equatorial Pacific process study experimental site (EqPac), in the central equatorial Pacific upwelling system (–2 to 2ºN, 140ºW).
 - Hawaii Ocean Time-series (HOT) station ALOHA, in the subtropical NE Pacific (22.45ºN, 158ºW).
 - Bermuda Atlantic Time-Series (BATS) study site, in the subtropical NW Atlantic (31.6ºN, 64.2ºW).
-- US JGOFS Equatorial Pacific process study experimental site (EqPac), in the central equatorial Pacific upwelling system (–2 to 2ºN, 140ºW).
 - Ocean Station Papa (OSP), in the HNLC region of the subpolar NE Pacific (50ºN, 145ºW).
 
 ## Acknowledgments

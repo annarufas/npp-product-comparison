@@ -1,6 +1,6 @@
-function qArray = standardTimeInterpolation(array,t)
+function qArray = timeInterpolationStandard(array,t)
 
-% STANDARDTIMEINTERPOLATION Fills temporal gaps in a 3D array using 
+% TIMEINTERPOLATIONSTANDARD Fills temporal gaps in a 3D array using 
 % interpolation. This function fills temporal gaps (NaN values) in a 3D 
 % array of dimensions lat x lon x time by interpolating over the time 
 % dimension. Interpolation is applied only for grid cells with at least 2 
@@ -61,4 +61,4 @@ end
 
 qArray(qArray == 0) = NaN;
 
-end % standardTimeInterpolation
+end % timeInterpolationStandard
