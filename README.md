@@ -61,4 +61,4 @@ This work was conducted as part of my ESA Living Planet Fellowship at the Univer
 
 If you use this repository in your research, please cite it as:
 
-> Rufas, A. (2024). annarufas/npp-product-comparison: Initial release (v1.0.0) [collection]. Zenodo. 
+> Rufas, A. (2024). annarufas/npp-product-comparison: Initial release (v1.0.0) [collection]. Zenodo. https://doi.org/10.5281/zenodo.14544977
