@@ -1,15 +1,15 @@
 ## Comparison of Net Primary Production (NPP) Models with In Situ Observations at four Data-Rich, Time-Series Locations
 
-This repository contains a collection of MATLAB scripts developed to evaluate and compare net primary production (NPP) models against *in situ* data. The scripts process, format and visualise freely-available NPP products for the global ocean and compare them with *in situ* oceanographic data from four time-series locations using the <sup>14</sup>C technique, enabling the identification of the most optimal model based on this comparison. The workflow addresses the often-overlooked task of systematically assessing multiple existing biogeochemical products used for forcing/calibrating/validating ocean models.
+![npp_models](https://github.com/user-attachments/assets/4173b715-c0d4-4c72-a9c5-490e20bba098)
+
+This repository contains a collection of MATLAB scripts developed to evaluate and compare net primary production (NPP) models against *in situ* data. The scripts process, format and visualise freely-available NPP model-derived products for the global ocean and compare them with *in situ* oceanographic data from four time-series locations using the <sup>14</sup>C technique, enabling the identification of the most optimal NPP model based on this comparison. The workflow addresses the often-overlooked task of systematically assessing multiple existing datasets used for forcing/calibrating/validating ocean biogeochemical models.
 
 The analysed NPP datasets include: 
 - Carbon, Absorption, and Fluorescence Euphotic-resolving ([**CAFE**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.cafe.m.php)) model.
 - Carbon-based Production Model ([**CbPM**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.cbpm2.m.php)).
 - Vertically Generalized Production Model ([**VGPM**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.vgpm.m.chl.m.sst.php)).
-- **Carr ([2002](https://doi.org/10.1016/S0967-0645(01)00094-7)) model**
+- **Carr ([2002](https://doi.org/10.1016/S0967-0645(01)00094-7))** model
 - ESA Biological Pump and Carbon Exchange Processes ([**BICEP**](https://catalogue.ceda.ac.uk/uuid/69b2c9c6c4714517ba10dab3515e4ee6/)) project model.
-
-![npp_c14_vs_models](https://private-user-images.githubusercontent.com/128830450/394737913-6f3f7a7b-4a02-4230-8b90-28ff1a909ad8.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzM5MjAyMTcsIm5iZiI6MTczMzkxOTkxNywicGF0aCI6Ii8xMjg4MzA0NTAvMzk0NzM3OTEzLTZmM2Y3YTdiLTRhMDItNDIzMC04YjkwLTI4ZmYxYTkwOWFkOC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMjExJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTIxMVQxMjI1MTdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1jZmQ2YjhiZDFhMmIzYTg4MzBlN2I0MTg5NGEzNTRlNTQ3MDBlMGEyZDYzNGRiOTBkNGEzODhjZWU2ZmIxYTUwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.z4w8OJFykePP_G5EFshY5fg90oe3sH7Cx1yJK7eapeA)
 
 ## Requirements
 
@@ -28,13 +28,9 @@ To use the content of this repository, ensure you have the following.
     - `./internal/`: custom MATLAB functions generated specifically for calculating and plotting (*provided*).
 - `./figures/`: figures generated from processed data (*provided*).
 
-## Data Sources
-
-The NPP datasets used in this repository are sourced from the following open-access resources:
-
 ## Obtaining Raw Data
 
-Raw NPP model data were obtained as `.nc` files from the repositories corresponding to the five models listed above. These files were then processed using scripts in in this related [repository](https://github.com/annarufas/ocean-data-lab) (not included here due to size constraints), resulting in the generation of the following five `.mat` files: `npp_cafe_modis.mat`, `npp_cbpm_modis.mat`, `npp_vgpm_modis.mat`, `npp_carr2002_aquamodis_pathfinder_zeuc02.mat`, `npp_bicep.mat`. Once generated, please place them under the `./data/raw/` directory.
+Raw NPP model-derived data products were obtained as `.nc` files from the repositories corresponding to the five models listed above. These files were then processed using scripts in in this related [repository](https://github.com/annarufas/ocean-data-lab) (not included here due to size constraints), resulting in the generation of the following five `.mat` files: `npp_cafe_modis.mat`, `npp_cbpm_modis.mat`, `npp_vgpm_modis.mat`, `npp_carr2002_aquamodis_pathfinder_zeuc02.mat`, `npp_bicep.mat`. Once generated, please place them under the `./data/raw/` directory.
 
 ## MATLAB Scripts
 
@@ -44,18 +40,18 @@ Raw NPP model data were obtained as `.nc` files from the repositories correspond
 | 2  | calculateGloballyIntegratedNpp.m  | Calculation of globally integrated NPP stocks                |
 | 3  | mapMonthlyNpp.m                   | Visualisation of monthly modelled NPP                        |
 | 4  | mapAnnualNpp.m                    | Visualisation of annual modelled NPP                         |
-| 5  | nppInsituMonthlyMean.m            | Processing of 14C in situ observations and monthly values    |
+| 5  | nppInsituMonthlyMean.m            | Processing of <sup>14</sup>C *in situ* observations and monthly values    |
 | 6  | extractLocalModelledNpp.m         | Extraction of modelled NPP at study locations                |
 | 7  | calculateMatchupStatistics.m      | Calculation of matchup statistics                            |
 | 8  | plotBarChartInsituVsModelled.m    | Bar chart comparison of observations-models                  |
 
 ## Reproducibility
 
-The provided scripts perform a matchup analysis using *in situ* data from the following study sites:
-- US JGOFS Equatorial Pacific process study experimental site (EqPac), in the central equatorial Pacific upwelling system (–2 to 2ºN, 140ºW).
-- Hawaii Ocean Time-series (HOT) station ALOHA, in the subtropical NE Pacific (22.45ºN, 158ºW).
+The provided scripts perform a matchup analysis using *in situ* data from the following time-series study sites:
+- U.S. Joint Global Ocean Flux Study (JGOFS) Equatorial Pacific process study experimental site (EqPac), in the central equatorial Pacific upwelling system (0ºN, 140ºW).
+- Hawaii Ocean Time-series (HOT) station ALOHA, in the subtropical NE Pacific (22.5ºN, 158ºW).
 - Bermuda Atlantic Time-Series (BATS) study site, in the subtropical NW Atlantic (31.6ºN, 64.2ºW).
-- Ocean Station Papa (OSP), in the HNLC region of the subpolar NE Pacific (50ºN, 145ºW).
+- Ocean Station Papa (OSP), in the high-nutrient, low-chlorophyll region of the subpolar NE Pacific (50ºN, 145ºW).
 
 ## Acknowledgments
 
