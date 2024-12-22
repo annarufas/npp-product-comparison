@@ -93,7 +93,7 @@ function generateLatexOutput(matchupStats,stationLabels,modelLabels,statLabels,.
 
     % Call a custom function to generate the LaTeX table
     generateLatexTable(misfitDataTransposed,stationLabels,modelLabels,statLabels, ...
-        fullfile('.','data','interim',filenameOutputLatexTableStats));
+        fullfile('.','data','processed',filenameOutputLatexTableStats));
     
 end % generateLatexOutput
 
@@ -122,7 +122,7 @@ function generateCsvOutput(nppData,filenameOutputCsvTable,labelModels,labelLocat
         num2cell(nppDataReshaped)]]);
     
     % Write table to CSV without column names
-    writetable(csvContent,fullfile('.','data','interim',filenameOutputCsvTable),...
+    writetable(csvContent,fullfile('.','data','processed',filenameOutputCsvTable),...
         'WriteVariableNames',false,'Delimiter',',');
 
 end % generateCsvOutput
@@ -139,7 +139,6 @@ function generateLatexTable(data,labelStations,labelModelNames,...
 
     % Open file for writing
     fid = fopen(pathToFile, 'w');
-
     fprintf(fid, '\\begin{table}[h]\n');
     fprintf(fid, '\\centering\n');
     fprintf(fid, '\\begin{tabular}{%s}\n', repmat('c', 1, size(data, 2)));

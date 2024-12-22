@@ -8,8 +8,8 @@
 % evaluates global NPP distribution for the five models and calculates    %
 % integrated global stocks using two different interpolation methods.     %
 %                                                                         %
-% The workflow is divided into the following 8 sections:                  %                                   %
-%   Section 1 - Presets.                                                  %
+% The workflow is divided into the following 8 sections:                  %                                  
+%   Section 1 - Presets                                                   %
 %   Section 2 - Calculation of globally integrated NPP stocks             %
 %   Section 3 - Visualisation of monthly modelled NPP                     %
 %   Section 4 - Visualisation of annual modelled NPP                      %
@@ -42,9 +42,9 @@ addpath(genpath('./code/'));
 filenameInputModelledNpp = {'npp_cafe_modis',...                 
                             'npp_cbpm_modis',...
                             'npp_vgpm_modis',...
-                            'npp_carr2002_seawifs_pathfinder',...
+                            'npp_carr2002_aquamodis_pathfinder_zeuc02',...
                             'npp_bicep'};                  
-filenameInputInsituNpp = 'npp_c14.xls'; % 14C data at study locations
+filenameInputInsituNpp    = 'npp_c14.xls'; % 14C data at study locations
 
 % Output filenames
 filenameOutputModelledNppProcessed   = 'npp_global_modelled.mat';
@@ -53,7 +53,7 @@ filenameOutputLatexTableMatchupStats = 'npp_matchup_stats.tex';
 
 % Naming conventions
 labelLocations = {'ALOHA','BATS','EqPac','OSP'}; % study locations, notice names are the same as in the input file 'npp_c14.xls' 
-labelModels = {'CAFE MODIS','CBPM MODIS','VGPM MODIS','Carr 2002','BICEP'};
+labelModels = {'CAFE (MODIS)','CbPM (MODIS)','VGPM (MODIS)','Carr 2002 (MODIS)','BICEP (merged)'};
 
 % Build study location information
 locationInformation = array2table(NaN(numel(labelLocations), 2), ...

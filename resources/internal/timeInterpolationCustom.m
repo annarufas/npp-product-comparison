@@ -1,6 +1,6 @@
-function qArray = cleverTimeInterpolation(array,t)
+function qArray = timeInterpolationCustom(array,t)
 
-% CLEVERTIMEINTERPOLATION Fills temporal gaps in a 3D array using multiple 
+% TIMEINTERPOLATIONCUSTOM Fills temporal gaps in a 3D array using multiple 
 % interpolation strategies. This function performs multi-step interpolation 
 % to fill gaps in a 3D array (lat x lon x time). It applies three 
 % interpolation rounds: (1) interpolation for isolated gaps (zeros between 
@@ -52,13 +52,13 @@ for iRow = 1:size(array,1)
 
         % Perform interpolation only if at least two non-zero values exist
         if sum(timeSeries > 0) > 1 
-             %%
+ 
             % First round: interpolate isolated gaps
             timeSeries = interpolateIsolatedGaps(timeSeries, t);
-%%
+
             % Second round: interpolate consecutive gaps bounded by valid data
             timeSeries = interpolateBoundedGaps(timeSeries, t);
-%%
+
             % Third round: handle gaps at the edges using flip-based ("capicúa") interpolation
             timeSeries = interpolateEdgeGaps(timeSeries);
  
@@ -79,7 +79,7 @@ end
 qArray(qArray<0) = 0;
 qArray(qArray==0) = NaN; 
 
-end % cleverTimeInterpolation
+end % timeInterpolationCustom
 
 % =========================================================================
 %%

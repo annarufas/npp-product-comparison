@@ -44,7 +44,7 @@ function plotBarChartInsituVsModelled(combinedModelAndObsNpp,labelModels,labelLo
         % Add legend for models
         if (iLoc == 2)
             lg = legend(legendLabels,'NumColumns', 1,'Location','northeastoutside');
-            lg.Position(1) = 0.83; lg.Position(2) = 0.72;
+            lg.Position(1) = 0.825; lg.Position(2) = 0.72;
             lg.ItemTokenSize = [11,5];
             lg.FontSize = 11;
             set(lg,'Box','off');
