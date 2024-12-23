@@ -9,17 +9,17 @@ function plotBarChartInsituVsModelled(combinedModelAndObsNpp,labelModels,labelLo
     yMax = [800, 800, 1600, 800]; % by location, mg C m-2 d-1
 
     figure()
-    set(gcf,'Units','Normalized','Position',[0.01 0.05 0.45 0.50],'Color','w')
+    set(gcf,'Units','Normalized','Position',[0.01 0.05 0.50 0.50],'Color','w')
     haxis = zeros(nLocs,1);
 
     for iLoc = 1:nLocs
 
-        haxis(iLoc) = subaxis(2,2,iLoc,'Spacing',0.02,'Padding',0.04,'Margin',0.07);
+        haxis(iLoc) = subaxis(2,2,iLoc,'Spacing',0.02,'Padding',0.04,'Margin',0.08);
         ax(iLoc).pos = get(haxis(iLoc),'Position');
         if (iLoc == 1 || iLoc == 3)
-            ax(iLoc).pos(1) = ax(iLoc).pos(1) - 0.04;
+            ax(iLoc).pos(1) = ax(iLoc).pos(1) - 0.05;
         elseif (iLoc == 2 || iLoc == 4)
-            ax(iLoc).pos(1) = ax(iLoc).pos(1) - 0.07;
+            ax(iLoc).pos(1) = ax(iLoc).pos(1) - 0.08;
         end
         set(haxis(iLoc), 'Position', ax(iLoc).pos)
 
@@ -44,7 +44,7 @@ function plotBarChartInsituVsModelled(combinedModelAndObsNpp,labelModels,labelLo
         % Add legend for models
         if (iLoc == 2)
             lg = legend(legendLabels,'NumColumns', 1,'Location','northeastoutside');
-            lg.Position(1) = 0.825; lg.Position(2) = 0.72;
+            lg.Position(1) = 0.81; lg.Position(2) = 0.68;
             lg.ItemTokenSize = [11,5];
             lg.FontSize = 11;
             set(lg,'Box','off');

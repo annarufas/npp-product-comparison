@@ -16,9 +16,8 @@ function calculateGloballyIntegratedNpp(filenameInputNppModels,labelModels,...
         productFileName = filenameInputNppModels{iModel};
         productName = labelModels{iModel};
 
-        % Load raw NPP data
-        load(fullfile('data','raw',strcat(productFileName,'.mat')),...
-            'npp_lat','npp_lon','npp_avg') % mg C m-2 d-1
+        % Load raw NPP data, mg C m-2 d-1
+        load(fullfile('data','raw',productFileName),'npp_lat','npp_lon','npp_avg')
 
         % Calculate grid cell areas (m2) using Climate Data Toolbox
         [latGrid,lonGrid] = ndgrid(npp_lat,npp_lon); % cdtarea needs lat x lon (in that order)
@@ -64,7 +63,7 @@ function calculateGloballyIntegratedNpp(filenameInputNppModels,labelModels,...
             counter = counter + 1;
 
             % Save 3D data arrays in the output structure
-            fieldName = [productFileName, '_', label];
+            fieldName = [erase(productFileName, '.mat'), '_', label];
             nppModelClimatologyStruct.(fieldName).data = nppData;
             nppModelClimatologyStruct.(fieldName).lat = npp_lat;
             nppModelClimatologyStruct.(fieldName).lon = npp_lon;
