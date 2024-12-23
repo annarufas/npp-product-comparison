@@ -21,16 +21,16 @@
 %   WRITTEN BY A. RUFAS, UNIVERISTY OF OXFORD                             %
 %   Anna.RufasBlanco@earth.ox.ac.uk                                       %
 %                                                                         %
-%   Version 1.0 - Completed 11 Dec 2024                                   %
+%   Version 1.0 - Completed 23 Dec 2024                                   %
 %                                                                         %
 % ======================================================================= %
 
 close all; clear all; clc
-addpath(genpath('./data/processed/'));
-addpath(genpath('./data/raw/'));
+addpath('./data/processed/');
+addpath('./data/raw/');
 addpath(genpath('./resources/external/')); 
-addpath(genpath('./resources/internal/')); 
-addpath(genpath('./code/'));
+addpath('./resources/internal/'); 
+addpath('./code/');
 
 % =========================================================================
 %%
@@ -39,21 +39,24 @@ addpath(genpath('./code/'));
 % -------------------------------------------------------------------------
 
 % Input filenames
-filenameInputModelledNpp = {'npp_cafe_modis',...                 
-                            'npp_cbpm_modis',...
-                            'npp_vgpm_modis',...
-                            'npp_carr2002_modis_pathfinder_zeuc02',...
-                            'npp_bicep'};                  
+filenameInputModelledNpp = {'npp_vgpm_modis.mat',...
+                            'npp_cbpm_modis.mat',...
+                            'npp_cafe_modis.mat',...
+                            'npp_bicep.mat',...
+                            'npp_carr2002_seawifs_pathfinder_zeub97.mat',...
+                            'npp_carr2002_modis_pathfinder_zeuc02.mat'}; 
+                        
 filenameInputInsituNpp    = 'npp_c14.xls'; % 14C data at study locations
 
 % Output filenames
-filenameOutputModelledNppProcessed   = 'npp_global_modelled.mat';
+filenameOutputModelledNppProcessed   = 'npp_modelled.mat';
 filenameOutputCsvTableLocalNpp       = 'npp_local_14Cobs_and_modelled.csv';
 filenameOutputLatexTableMatchupStats = 'npp_matchup_stats.tex';
 
 % Naming conventions
 labelLocations = {'ALOHA','BATS','EqPac','OSP'}; % study locations, notice names are the same as in the input file 'npp_c14.xls' 
-labelModels = {'CAFE (MODIS)','CbPM (MODIS)','VGPM (MODIS)','Carr 2002 (MODIS)','BICEP (merged)'};
+labelModels = {'VGPM (MODIS)','CbPM (MODIS)','CAFE (MODIS)','BICEP (merged)',...
+    'Carr (SeaWiFS, B&F97)','Carr (MODIS, C02)',};
 
 % Build study location information
 locationInformation = array2table(NaN(numel(labelLocations), 2), ...

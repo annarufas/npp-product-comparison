@@ -14,7 +14,8 @@ function nppModelLocalMonthlyMean = extractLocalModelledNpp(...
     for iModel = 1:nNppModels
 
         % Get data from the structure
-        fieldName = [filenameModelledNpp{iModel}, '_plain']; 
+        fileName = erase(filenameModelledNpp{iModel},'.mat');
+        fieldName = [fileName, '_plain']; 
         data = nppModelClimatologyStruct.(fieldName).data;
         lat = nppModelClimatologyStruct.(fieldName).lat;
         lon = nppModelClimatologyStruct.(fieldName).lon;

@@ -31,7 +31,8 @@ function mapAnnualNpp(filenameModelledNpp,filenameModelledNppProcessed)
             end
 
             % Get data from the structure
-            fieldName = [filenameModelledNpp{iModel}, '_', label]; 
+            fileName = erase(filenameModelledNpp{iModel},'.mat');
+            fieldName = [fileName, '_', label]; 
             data = nppModelClimatologyStruct.(fieldName).data;
             lat = nppModelClimatologyStruct.(fieldName).lat;
             lon = nppModelClimatologyStruct.(fieldName).lon;
@@ -58,7 +59,7 @@ function mapAnnualNpp(filenameModelledNpp,filenameModelledNppProcessed)
     % Plot the annual mean data for all methods using the custom plotting function
     plotOceanVariableMaps(nppModelledAnnualMeanAll,qLon,qLat,myColourScheme,cbString,...
         caxismin,caxismax,isCommonColourBar,globalNppStockSummary,'npp_annual_interp_comp',[])
-    
+
     % Plot the annual mean data for plain data using the custom plotting function
     plotOceanVariableMaps(nppModelledAnnualMeanPlain,qLon,qLat,myColourScheme,cbString,...
         caxismin,caxismax,isCommonColourBar,globalNppStockSummaryPlain,'npp_annual',[])

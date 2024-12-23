@@ -1,6 +1,6 @@
 function [matchupStats,combinedModelAndObsNpp] = calculateMatchupStatistics(...
     nppInsituMonthlyMean,nppModelLocalMonthlyMean,labelModels,labelLocations,...
-    filenameOutputLatexTableStats,filenameOutputCsvTableNpp)
+    filenameOutputLatexTableMatchupStats,filenameOutputCsvTableLocalNpp)
 
 % CALCULATEMATCHUPSTATISTICS Computes regression statistics between modelled 
 % and in situ NPP data and generate a .tex table for statistics outputs 
@@ -36,11 +36,13 @@ function [matchupStats,combinedModelAndObsNpp] = calculateMatchupStatistics(...
     end
 
     % Generate LaTeX table for regression statistics
-    generateLatexOutput(matchupStats,labelLocations,labelModels,labelStats,filenameOutputLatexTableStats);
+    generateLatexOutput(matchupStats,labelLocations,labelModels,labelStats,...
+        filenameOutputLatexTableMatchupStats);
 
     % Generate CSV table for NPP data
-    generateCsvOutput(combinedModelAndObsNpp,filenameOutputCsvTableNpp,labelModels,labelLocations);
-    
+    generateCsvOutput(combinedModelAndObsNpp,labelModels,labelLocations,...
+        filenameOutputCsvTableLocalNpp);
+  
 end % calculateMatchupStatistics
 
 % =========================================================================
@@ -99,7 +101,7 @@ end % generateLatexOutput
 
 % *************************************************************************
 
-function generateCsvOutput(nppData,filenameOutputCsvTable,labelModels,labelLocations)
+function generateCsvOutput(nppData,labelModels,labelLocations,filenameOutputCsvTable)
 
     % Reshape data for CSV
     [nMonths, nDataTypes, nLocs] = size(nppData);
@@ -109,10 +111,8 @@ function generateCsvOutput(nppData,filenameOutputCsvTable,labelModels,labelLocat
     firstHeaderRow = [{''},repmat(labelLocations(1),1,nDataTypes),...
                            repmat(labelLocations(2),1,nDataTypes),...
                            repmat(labelLocations(3),1,nDataTypes),...
-                           repmat(labelLocations(4),1,nDataTypes)];
-    secondHeaderRow = [{''},repmat([labelModels(1),labelModels(2),...
-                                    labelModels(3),labelModels(4),...
-                                    labelModels(5),{'14C'}],1,nLocs)];
+                           repmat(labelLocations(4),1,nDataTypes)];            
+    secondHeaderRow = [{''}, repmat([labelModels, {'14C'}], 1, nLocs)];
 
     % Combine headers and data
     csvContent = cell2table([...

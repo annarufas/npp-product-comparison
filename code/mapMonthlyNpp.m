@@ -5,7 +5,7 @@ function mapMonthlyNpp(filenameModelledNpp,filenameModelledNppProcessed)
     load(fullfile('data','processed',filenameModelledNppProcessed),...
         'globalNppStockSummary','nppModelClimatologyStruct')
 
-    myColorScheme = [ones(1,3); jet(1000)];
+    myColourScheme = [ones(1,3); jet(1000)];
     caxismin = 0; % mg C m-2 d-2
     caxismax = 1000; % mg C m-2 d-2
     cbString = 'NPP (mg C m^{-2} d^{-1})';
@@ -21,15 +21,16 @@ function mapMonthlyNpp(filenameModelledNpp,filenameModelledNppProcessed)
             end
 
             % Get data from the structure
-            fieldName = [filenameModelledNpp{iModel}, '_', label]; 
+            fileName = erase(filenameModelledNpp{iModel}, '.mat');
+            fieldName = [fileName, '_', label]; 
             data = nppModelClimatologyStruct.(fieldName).data;
             lat = nppModelClimatologyStruct.(fieldName).lat;
             lon = nppModelClimatologyStruct.(fieldName).lon;
 
             % Plot the dataset for the current product and the current method
             iDataset = (iModel - 1)*3 + iMethod;
-            figureName = strcat('npp_monthly_',filenameModelledNpp{iModel},'_',label);
-            plotOceanVariableMaps(data,lon,lat,myColorScheme,cbString,caxismin,...
+            figureName = ['npp_monthly_',fileName,'_',label];
+            plotOceanVariableMaps(data,lon,lat,myColourScheme,cbString,caxismin,...
                 caxismax,isCommonColourBar,labelMonths,figureName,globalNppStockSummary{iDataset})
 
         end % iMethod

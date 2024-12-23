@@ -128,7 +128,7 @@ elseif (nSubplots == 3)
 
     saveFigure(figureName)
 
-elseif (nSubplots == 5)
+elseif (nSubplots == 5 && isCommonColourBar)
     
     figure()
     set(gcf,'Units','Normalized','Position',[0.01 0.05 0.40 0.55],'Color','w')
@@ -165,6 +165,43 @@ elseif (nSubplots == 5)
     cb.FontSize = 12;
 
     saveFigure(figureName)
+
+elseif (nSubplots == 6 && isCommonColourBar)
+    
+    figure()
+    set(gcf,'Units','Normalized','Position',[0.01 0.05 0.40 0.55],'Color','w')
+    haxis = zeros(nSubplots,1);
+
+    for iSubplot = 1:nSubplots
+
+        haxis(iSubplot) = subaxis(3,2,iSubplot,'Spacing',0.01,'Padding',0.02,'Margin',0.04);
+        ax(iSubplot).pos = get(haxis(iSubplot),'Position');
+
+        if (iSubplot == 1 || iSubplot == 2)
+            ax(iSubplot).pos(2) = ax(iSubplot).pos(2) + 0.02;
+        elseif (iSubplot == 3 || iSubplot == 4)
+            ax(iSubplot).pos(2) = ax(iSubplot).pos(2) + 0.04;
+        elseif (iSubplot == 5 || iSubplot == 6)
+            ax(iSubplot).pos(2) = ax(iSubplot).pos(2) + 0.06;
+        end  
+        set(haxis(iSubplot), 'Position', ax(iSubplot).pos) 
+
+        mydata = oceanVar(:,:,iSubplot);
+        plotPcolorMap(haxis(iSubplot),lonVector,latVector,mydata,myColormap,caxisMin,caxisMax);
+        title(labelVars(iSubplot),'FontSize',13)
+
+    end
+    
+    cb = colorbar(haxis(6));
+    cb.Location = 'southoutside';
+    cb.Position(1) = 0.25; 
+    cb.Position(2) = 0.075; 
+    cb.Position(3) = 0.50; % length 
+    cb.Position(4) = 0.02; % width 
+    cb.Label.String = cbString;
+    cb.FontSize = 11;
+
+    saveFigure(figureName)
  
 elseif (nSubplots == 6 && ~isCommonColourBar)
     
@@ -196,6 +233,43 @@ elseif (nSubplots == 6 && ~isCommonColourBar)
         cb.FontSize = 8;
 
     end
+
+    saveFigure(figureName)
+    
+elseif (nSubplots == 9 && isCommonColourBar)
+    
+    figure()
+    set(gcf,'Units','Normalized','Position',[0.01 0.05 0.40 0.55],'Color','w')
+    haxis = zeros(nSubplots,1);
+
+    for iSubplot = 1:nSubplots
+
+        haxis(iSubplot) = subaxis(3,3,iSubplot,'Spacing',0.01,'Padding',0.02,'Margin',0.04);
+        ax(iSubplot).pos = get(haxis(iSubplot),'Position');
+
+        if (iSubplot == 1 || iSubplot == 2 || iSubplot == 3)
+            ax(iSubplot).pos(2) = ax(iSubplot).pos(2) + 0.02;
+        elseif (iSubplot == 4 || iSubplot == 5 || iSubplot == 6)
+            ax(iSubplot).pos(2) = ax(iSubplot).pos(2) + 0.04;
+        elseif (iSubplot == 7 || iSubplot == 8 || iSubplot == 9)
+            ax(iSubplot).pos(2) = ax(iSubplot).pos(2) + 0.06;
+        end  
+        set(haxis(iSubplot), 'Position', ax(iSubplot).pos) 
+
+        mydata = oceanVar(:,:,iSubplot);
+        plotPcolorMap(haxis(iSubplot),lonVector,latVector,mydata,myColormap,caxisMin,caxisMax);
+        title(labelVars(iSubplot),'FontSize',13)
+
+    end
+    
+    cb = colorbar(haxis(nSubplots));
+    cb.Location = 'southoutside';
+    cb.Position(1) = 0.25; 
+    cb.Position(2) = 0.075; 
+    cb.Position(3) = 0.50; % length 
+    cb.Position(4) = 0.02; % width 
+    cb.Label.String = cbString;
+    cb.FontSize = 11;
 
     saveFigure(figureName)
 
@@ -254,6 +328,36 @@ elseif (nSubplots == 15)
     cb.Position(2) = ax(14).pos(2) - 0.025;
 %     cb.Position(3) = 0.12; % length
     cb.Position(4) = 0.015; % width
+    cb.Label.String = cbString;
+    cb.FontSize = 10;
+
+    saveFigure(figureName)
+
+elseif (nSubplots == 18)
+
+    figure()
+    set(gcf,'Units','Normalized','Position',[0.01 0.05 0.55 0.85],'Color','w')
+    haxis = zeros(nSubplots,1);
+
+    for iSubplot = 1:nSubplots
+
+        haxis(iSubplot) = subaxis(6,3,iSubplot,'Spacing',0.005,'Padding',0.015,'Margin',0.04);
+        ax(iSubplot).pos = get(haxis(iSubplot),'Position');
+        ax(iSubplot).pos(2) =  ax(iSubplot).pos(2) + 0.03;
+        set(haxis(iSubplot),'Position',ax(iSubplot).pos) 
+
+        mydata = oceanVar(:,:,iSubplot);
+        plotPcolorMap(haxis(iSubplot),lonVector,latVector,mydata,myColormap,caxisMin,caxisMax);
+        title(labelVars(iSubplot),'FontSize',11)     
+
+    end
+
+    cb = colorbar(haxis(nSubplots));
+    cb.Location = 'southoutside';
+    cb.Position(3) = 0.40; % length
+    cb.Position(4) = 0.01; % width
+    cb.Position(1) = 0.50-cb.Position(3)/2;
+    cb.Position(2) = 0.05; 
     cb.Label.String = cbString;
     cb.FontSize = 10;
 
