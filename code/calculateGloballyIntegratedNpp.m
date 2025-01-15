@@ -1,19 +1,19 @@
-function calculateGloballyIntegratedNpp(filenameInputNppModels,labelModels,...
-    filenameOutputModelledNppProcessed)
+function calculateGloballyIntegratedNpp(filenameInputModelledNpp,...
+    filenameInputCustomMask,labelModels,filenameOutputModelledNpp)
 
 % CALCULATEGLOBALLYINTEGRATEDNPP Calculates globally integrated net primary
-% production (NPP) testing the effect of two interpolation methods (custom 
-% and standard).
+% production (NPP) testing the effect of a gap-filling method.
 
     nNppModels = length(labelModels);
+    nGapFillingMethods = 2;
     
     % Preallocate globally integrated NPP values
-    globalNppStockSummary = cell(nNppModels*3,1); % summarised string representation of global NPP values
+    globalNppStockSummary = cell(nNppModels*nGapFillingMethods,1); % summarised string representation of global NPP values
     nppModelClimatologyStruct = struct(); % structure to store processed NPP
 
     counter = 1;
     for iModel = 1:nNppModels
-        productFileName = filenameInputNppModels{iModel};
+        productFileName = filenameInputModelledNpp{iModel};
         productName = labelModels{iModel};
 
         % Load raw NPP data, mg C m-2 d-1
@@ -30,23 +30,22 @@ function calculateGloballyIntegratedNpp(filenameInputNppModels,labelModels,...
         elseif nRowsNpp < nColsNpp
             nppGridOriginal = npp_avg;
         end
+        
+        % Load mask
+        load(fullfile('data','raw',filenameInputCustomMask),'mask','mask_lat','mask_lon')
 
-        % Perform two different interpolation methods on NPP data
-        nppInterpolatedMethod1 = timeInterpolationCustom(nppGridOriginal,(1:12)); % custom time interpolation method
-        nppInterpolatedMethod2 = timeInterpolationStandard(nppGridOriginal,(1:12)); % standard time interpolation method
-
+        % Custom gap-filling method
+        nppGapFilled = fillGapsInSurfaceOceanForcing(nppGridOriginal,mask,...
+            npp_lat,npp_lon,mask_lat,mask_lon,(1:12)); 
+        
         % Process and integrate data for each method
-        for iMethod = 1:3
-            switch iMethod
-                case 1
-                    label = 'plain';
-                    nppData = nppGridOriginal;
-                case 2
-                    label = 'interpm1';
-                    nppData = nppInterpolatedMethod1;
-                case 3
-                    label = 'interpm2';
-                    nppData = nppInterpolatedMethod2;
+        for iMethod = 1:nGapFillingMethods
+            if iMethod == 1
+                label = 'plain';
+                nppData = nppGridOriginal;
+            else
+                label = 'gapfilled';
+                nppData = nppGapFilled;
             end
 
             % Replace NaN with 0 for summation purposes
@@ -58,7 +57,7 @@ function calculateGloballyIntegratedNpp(filenameInputNppModels,labelModels,...
             globalNppStock = sum(nppStockAnnualMean,'all'); % Pg C yr-1
 
             % Store results in the output string
-            globalNppStockSummary{counter} = sprintf('%s %s: %.1f Gt C/yr', ...
+            globalNppStockSummary{counter} = sprintf('%s %s: %.0f Gt C/yr', ...
                 productName, label, globalNppStock);
             counter = counter + 1;
 
@@ -71,7 +70,7 @@ function calculateGloballyIntegratedNpp(filenameInputNppModels,labelModels,...
         end % iMethod
     end % iModel
 
-    save(fullfile('data','processed',filenameOutputModelledNppProcessed),...
+    save(fullfile('data','processed',filenameOutputModelledNpp),...
         'globalNppStockSummary','nppModelClimatologyStruct','-v7.3')
     
 end % calculateGloballyIntegratedNpp
