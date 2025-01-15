@@ -22,6 +22,10 @@
 %   Anna.RufasBlanco@earth.ox.ac.uk                                       %
 %                                                                         %
 %   Version 1.0 - Completed 23 Dec 2024                                   %
+%   Version 2.0 - Updated 15 Jan 2025                                     %
+%                   - Added a guided gap-filling method that uses a mask  %
+%                     created from the combined effect of chla            %
+%                     availability and ice coverage                       %
 %                                                                         %
 % ======================================================================= %
 
@@ -45,8 +49,9 @@ filenameInputModelledNpp = {'npp_vgpm_modis.mat',...
                             'npp_bicep.mat',...
                             'npp_carr2002_seawifs_pathfinder_zeub97.mat',...
                             'npp_carr2002_modis_pathfinder_zeuc02.mat'}; 
-                        
-filenameInputInsituNpp    = 'npp_c14.xls'; % 14C data at study locations
+
+filenameInputInsituNpp    = 'npp_c14.xls'; % in situ NPP data from the 14C method at study locations
+filenameInputCustomMask   = 'custom_mask_icefrac_cmems_chla_occci.mat'; % mask to guide gap-filling                  
 
 % Output filenames
 filenameOutputModelledNppProcessed   = 'npp_modelled.mat';
@@ -73,8 +78,8 @@ locationInformation{4,:} = [50,   -145];
 % SECTION 2 - CALCULATION OF GLOBALLY INTEGRATED NPP STOCKS
 % -------------------------------------------------------------------------
 
-calculateGloballyIntegratedNpp(filenameInputModelledNpp,labelModels,...
-    filenameOutputModelledNppProcessed)
+calculateGloballyIntegratedNpp(filenameInputModelledNpp,filenameInputCustomMask,...
+    labelModels,filenameOutputModelledNppProcessed)
  
 % =========================================================================
 %%
@@ -82,7 +87,7 @@ calculateGloballyIntegratedNpp(filenameInputModelledNpp,labelModels,...
 % SECTION 3 - VISUALISATION OF MONTHLY MODELLED NPP
 % -------------------------------------------------------------------------
 
-mapMonthlyNpp(filenameInputModelledNpp,filenameOutputModelledNppProcessed);
+mapMonthlyNpp(filenameInputModelledNpp,filenameOutputModelledNppProcessed)
 
 % =========================================================================
 %%
@@ -106,6 +111,7 @@ nppInsituMonthlyMean = processInsituNpp(filenameInputInsituNpp,labelLocations);
 % SECTION 6 - EXTRACTION OF MODELLED NPP AT STUDY LOCATIONS
 % -------------------------------------------------------------------------
 
+% Use gap-filled modelled data
 nppModelLocalMonthlyMean = extractLocalModelledNpp(filenameInputModelledNpp,...
     filenameOutputModelledNppProcessed,locationInformation); 
 
@@ -122,7 +128,7 @@ nppModelLocalMonthlyMean = extractLocalModelledNpp(filenameInputModelledNpp,...
 % =========================================================================
 %%
 % -------------------------------------------------------------------------
-% SECTION 8 - BAR CHART COMPARISON OF OBSERVATIONS-MODELS
+% SECTION 8 - BAR CHART COMPARISON OF OBSERVATIONS AND MODELS
 % -------------------------------------------------------------------------
 
 plotBarChartInsituVsModelled(combinedModelAndObsNpp,labelModels,labelLocations)
