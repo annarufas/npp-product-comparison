@@ -2,7 +2,7 @@
 
 ## Comparison of Net Primary Production (NPP) Models with In Situ Observations at four Data-Rich, Time-Series Locations
 
-![npp_annual](https://github.com/user-attachments/assets/a2e31208-f995-4ae3-bbf6-4c702b44083f)
+![npp_annual_gapfilled](https://github.com/user-attachments/assets/35439132-a9b6-4716-a9aa-e554274b65f1)
 *Annual mean net primary production (NPP) for six different MODELS. Printed on top of each map is the globally integrated average values of NPP for each model.*
 
 This repository contains a collection of MATLAB scripts developed to evaluate and compare net primary production (NPP) models against *in situ* data. The scripts process, format and visualise freely-available NPP model-derived products for the global ocean and compare them with *in situ* oceanographic data from four time-series locations using the <sup>14</sup>C technique, enabling the identification of the most optimal NPP model based on this comparison. The workflow addresses the often-overlooked task of systematically assessing multiple existing datasets used for forcing/calibrating/validating ocean biogeochemical models.
