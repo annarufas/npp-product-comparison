@@ -1,10 +1,13 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14544975.svg)](https://doi.org/10.5281/zenodo.14544975)
+
 ## Comparison of Net Primary Production (NPP) Models with In Situ Observations at four Data-Rich, Time-Series Locations
 
 ![npp_annual](https://github.com/user-attachments/assets/a2e31208-f995-4ae3-bbf6-4c702b44083f)
+*Annual mean net primary production (NPP) for six different MODELS. Printed on top of each map is the globally integrated average values of NPP for each model.*
 
 This repository contains a collection of MATLAB scripts developed to evaluate and compare net primary production (NPP) models against *in situ* data. The scripts process, format and visualise freely-available NPP model-derived products for the global ocean and compare them with *in situ* oceanographic data from four time-series locations using the <sup>14</sup>C technique, enabling the identification of the most optimal NPP model based on this comparison. The workflow addresses the often-overlooked task of systematically assessing multiple existing datasets used for forcing/calibrating/validating ocean biogeochemical models.
 
-The analysed NPP datasets include: 
+The five analysed NPP models include: 
 - Vertically Generalized Production Model ([**VGPM**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.vgpm.m.chl.m.sst.php)).
 - Carbon-based Production Model ([**CbPM**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.cbpm2.m.php)).
 - Carbon, Absorption, and Fluorescence Euphotic-resolving ([**CAFE**](http://orca.science.oregonstate.edu/1080.by.2160.monthly.hdf.cafe.m.php)) model.
@@ -12,6 +15,8 @@ The analysed NPP datasets include:
 - Carr ([**2002**](https://doi.org/10.1016/S0967-0645(01)00094-7)) model.
 
 ## Requirements
+
+*⚠️ Note: These instructions are designed and tested specifically for macOS. While they may work on other operating systems (e.g., Windows or Linux), you might need to adapt the installation code accordingly.*
 
 To use the content of this repository, ensure you have the following.
 - [MATLAB](https://mathworks.com/products/matlab.html) version R2021a or later installed.
@@ -30,7 +35,17 @@ To use the content of this repository, ensure you have the following.
 
 ## Obtaining Raw Data
 
-Raw NPP model-derived data products were obtained as `.nc` files from the repositories corresponding to the five models listed above. These files were then processed using scripts in in this related [repository](https://github.com/annarufas/ocean-data-lab) (not included here due to size constraints), resulting in the generation of the following five `.mat` files: `npp_vgpm_modis.mat`, `npp_cbpm_modis.mat`, `npp_cafe_modis.mat`, `npp_bicep.mat`, `npp_carr2002_seawifs_pathfinder_zeub97.mat` and `npp_carr2002_modis_pathfinder_zeuc02.mat`. Once generated, please place them under the `./data/raw/` directory.
+Raw NPP model-derived data products were obtained as `.nc` files from the repositories corresponding to the five models listed above. These raw files were then processed using scripts in this related [repository](https://github.com/annarufas/ocean-data-lab) (not included here due to size constraints). The processing resulted in the following six .mat files: 
+- `npp_vgpm_modis.mat`
+- `npp_cbpm_modis.mat`
+- `npp_cafe_modis.mat`
+- `npp_bicep.mat`
+- `npp_carr2002_seawifs_pathfinder_zeub97.mat`
+- `npp_carr2002_modis_pathfinder_zeuc02.mat`
+
+To proceed, place these generated files in the `./data/raw/` directory. Additionally, the `./data/raw/` directory contains:
+- *In situ* data, provided as an Excel file `npp_c14.xls`.
+- The file `custom_mask_icefrac_cmems_chla_occci.mat`, used to mask grid cells where NPP calculations are invalid. This mask considers both chlorophyll *a* presence and photosynthetically active radiation (PAR0) availability, ensuring biologically plausible outputs. It was generated using scripts in this related [repository](https://github.com/annarufas/gap-filling-methods-ocean-data).
 
 ## MATLAB Scripts
 
@@ -38,16 +53,17 @@ Raw NPP model-derived data products were obtained as `.nc` files from the reposi
 |----|-----------------------------------|---------------------------------------------------------------
 | 1  | main.m                            | Main entry point for running the entire data processing and plotting pipeline  |
 | 2  | calculateGloballyIntegratedNpp.m  | Calculation of globally integrated NPP stocks                |
-| 3  | mapMonthlyNpp.m                   | Visualisation of monthly modelled NPP                        |
-| 4  | mapAnnualNpp.m                    | Visualisation of annual modelled NPP                         |
-| 5  | nppInsituMonthlyMean.m            | Processing of <sup>14</sup>C *in situ* observations and monthly values    |
-| 6  | extractLocalModelledNpp.m         | Extraction of modelled NPP at study locations                |
-| 7  | calculateMatchupStatistics.m      | Calculation of matchup statistics                            |
-| 8  | plotBarChartInsituVsModelled.m    | Bar chart comparison of observations-models                  |
+| 3  | fillGapsInSurfaceOceanForcing.m   | Fills NaN gaps in data using a multi-step interpolation process and a mask created using chlorophyll *a* and light availability               |
+| 4  | mapMonthlyNpp.m                   | Visualisation of monthly modelled NPP                        |
+| 5  | mapAnnualNpp.m                    | Visualisation of annual modelled NPP                         |
+| 6  | processInsituNpp.m                | Processing of <sup>14</sup>C *in situ* observations and monthly values    |
+| 7  | extractLocalModelledNpp.m         | Extraction of modelled NPP at study locations                |
+| 8  | calculateMatchupStatistics.m      | Calculation of matchup statistics                            |
+| 9  | plotBarChartInsituVsModelled.m    | Bar chart comparison of observations-models                  |
 
 ## Reproducibility
 
-The provided scripts perform a matchup analysis using *in situ* data from the following time-series study sites:
+The provided scripts perform a matchup analysis using *in situ* data from the following four time-series study sites:
 - U.S. Joint Global Ocean Flux Study (JGOFS) Equatorial Pacific process study experimental site (EqPac), in the central equatorial Pacific upwelling system (0ºN, 140ºW).
 - Hawaii Ocean Time-series (HOT) station ALOHA, in the subtropical NE Pacific (22.5ºN, 158ºW).
 - Bermuda Atlantic Time-Series (BATS) study site, in the subtropical NW Atlantic (31.6ºN, 64.2ºW).
@@ -56,9 +72,3 @@ The provided scripts perform a matchup analysis using *in situ* data from the fo
 ## Acknowledgments
 
 This work was conducted as part of my ESA Living Planet Fellowship at the University of Oxford under the [SLAM DUNK](https://eo4society.esa.int/projects/slam-dunk/) project.
-
-## Cite as
-
-If you use this repository in your research, please cite it as:
-
-> Rufas, A. (2024). annarufas/npp-product-comparison: Initial release (v1.0.0) [collection]. Zenodo. https://doi.org/10.5281/zenodo.14544975
