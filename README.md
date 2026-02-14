@@ -35,7 +35,7 @@ To use the content of this repository, ensure you have the following.
 
 ## Obtaining Raw Data
 
-Raw NPP model-derived data products were obtained as `.nc` files from the repositories corresponding to the five models listed above. These raw files were then processed using scripts in this related [repository](https://github.com/annarufas/ocean-data-lab) (not included here due to size constraints). The processing resulted in the following six .mat files: 
+Raw NPP model-derived data products were obtained as `.nc` files from the repositories corresponding to the five models listed above. These raw files were then processed using scripts in this related repository, [ocean-data-lab](https://github.com/annarufas/ocean-data-lab) (not included here due to size constraints). The processing resulted in the following six .mat files: 
 - `npp_vgpm_modis.mat`
 - `npp_cbpm_modis.mat`
 - `npp_cafe_modis.mat`
@@ -45,21 +45,20 @@ Raw NPP model-derived data products were obtained as `.nc` files from the reposi
 
 To proceed, place these generated files in the `./data/raw/` directory. Additionally, the `./data/raw/` directory contains:
 - *In situ* data, provided as an Excel file `npp_c14.xls`.
-- The file `custom_mask_icefrac_cmems_chla_occci.mat`, used to mask grid cells where NPP calculations are invalid. This mask considers both chlorophyll *a* presence and photosynthetically active radiation (PAR0) availability, ensuring biologically plausible outputs. It was generated using scripts in this related [repository](https://github.com/annarufas/gap-filling-methods-ocean-data).
+- The file `mask_custom_icefrac_cmems_chla_occci.mat`, used to mask grid cells where NPP calculations are invalid. It accounts for chlorophyll *a* presence and sea ice fraction, allowing phytoplankton growth when sea ice remains below a threshold. This ensures biologically plausible outputs, as ice alone does not necessarily prevent phytoplankton growth, unless it exceeds a threshold value. The mask was generated using scripts in this related repository: [gap-filling-methods-ocean-data](https://github.com/annarufas/gap-filling-methods-ocean-data).
 
 ## MATLAB Scripts
 
 | Num| Script name                       | Script action                                                |
 |----|-----------------------------------|---------------------------------------------------------------
 | 1  | main.m                            | Main entry point for running the entire data processing and plotting pipeline  |
-| 2  | calculateGloballyIntegratedNpp.m  | Calculation of globally integrated NPP stocks                |
-| 3  | fillGapsInSurfaceOceanForcing.m   | Fills NaN gaps in data using a multi-step interpolation process and a mask created using chlorophyll *a* and light availability               |
-| 4  | mapMonthlyNpp.m                   | Visualisation of monthly modelled NPP                        |
-| 5  | mapAnnualNpp.m                    | Visualisation of annual modelled NPP                         |
-| 6  | processInsituNpp.m                | Processing of <sup>14</sup>C *in situ* observations and monthly values    |
-| 7  | extractLocalModelledNpp.m         | Extraction of modelled NPP at study locations                |
-| 8  | calculateMatchupStatistics.m      | Calculation of matchup statistics                            |
-| 9  | plotBarChartInsituVsModelled.m    | Bar chart comparison of observations-models                  |
+| 2  | calculateGloballyIntegratedNpp.m  | Calculation of globally integrated NPP stocks                |              |
+| 3  | mapMonthlyNpp.m                   | Visualisation of monthly modelled NPP                        |
+| 4  | mapAnnualNpp.m                    | Visualisation of annual modelled NPP                         |
+| 5  | processInsituNpp.m                | Processing of <sup>14</sup>C *in situ* observations and monthly values    |
+| 6  | extractLocalModelledNpp.m         | Extraction of modelled NPP at study locations                |
+| 7  | calculateMatchupStatistics.m      | Calculation of matchup statistics                            |
+| 8  | plotBarChartInsituVsModelled.m    | Bar chart comparison of observations-models                  |
 
 ## Reproducibility
 
