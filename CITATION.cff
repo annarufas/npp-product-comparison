@@ -17,5 +17,5 @@ authors:
 identifiers:
   - type: doi
     value: 10.5281/zenodo.14544975
-version: '2.0'
-date-released: '2025-01-15'
+version: '2.1.0'
+date-released: '2026-02-14'
