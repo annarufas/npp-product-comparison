@@ -3,7 +3,7 @@ function plotBarChartInsituVsModelled(combinedModelAndObsNpp,labelModels,labelLo
     nNppModels = length(labelModels);
     nLocs = length(labelLocations);
 
-    myColorScheme = [brewermap(nNppModels,'*YlGn'); zeros(1,3)]; % add a row of black for 14C 
+    myColourScheme = [brewermap(nNppModels,'*YlGn'); zeros(1,3)]; % add a row of black for 14C 
     legendLabels = [labelModels, {'^{14}C observations'}];
 
     yMax = [800, 800, 1600, 800]; % by location, mg C m-2 d-1
@@ -31,7 +31,7 @@ function plotBarChartInsituVsModelled(combinedModelAndObsNpp,labelModels,labelLo
 
         % Set colors for each bar group
         for k = 1:length(h)
-            h(k).FaceColor = myColorScheme(k, :); % assign custom color to each group
+            h(k).FaceColor = myColourScheme(k, :); % assign custom color to each group
         end
 
         box on

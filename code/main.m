@@ -25,7 +25,7 @@
 %   Version 2.0 - Updated 15 Jan 2025                                     %
 %                   - Added a guided gap-filling method that uses a mask  %
 %                     created from the combined effect of chla            %
-%                     availability and ice coverage                       %
+%                     concentration and ice coverage                      %
 %                                                                         %
 % ======================================================================= %
 
@@ -51,12 +51,13 @@ filenameInputModelledNpp = {'npp_vgpm_modis.mat',...
                             'npp_carr2002_modis_pathfinder_zeuc02.mat'}; 
 
 filenameInputInsituNpp    = 'npp_c14.xls'; % in situ NPP data from the 14C method at study locations
-filenameInputCustomMask   = 'custom_mask_icefrac_cmems_chla_occci.mat'; % mask to guide gap-filling                  
+filenameInputCustomMask   = 'mask_custom_icefrac_cmems_chla_occci.mat'; % mask to guide gap-filling                  
 
 % Output filenames
 filenameOutputModelledNppProcessed   = 'npp_modelled.mat';
 filenameOutputCsvTableLocalNpp       = 'npp_local_14Cobs_and_modelled.csv';
 filenameOutputLatexTableMatchupStats = 'npp_matchup_stats.tex';
+fullpathLogFile                      = fullfile('logs','logGapFilling.txt');
 
 % Naming conventions
 labelLocations = {'ALOHA','BATS','EqPac','OSP'}; % study locations, notice names are the same as in the input file 'npp_c14.xls' 
@@ -70,7 +71,10 @@ locationInformation = array2table(NaN(numel(labelLocations), 2), ...
 locationInformation{1,:} = [22.5, -158];
 locationInformation{2,:} = [31.6, -64.2];
 locationInformation{3,:} = [0,    -140];
-locationInformation{4,:} = [50,   -145];   
+locationInformation{4,:} = [50,   -145];
+
+% Log progress
+logID = fopen(fullpathLogFile,'w'); 
 
 % =========================================================================
 %%
@@ -79,7 +83,8 @@ locationInformation{4,:} = [50,   -145];
 % -------------------------------------------------------------------------
 
 calculateGloballyIntegratedNpp(filenameInputModelledNpp,filenameInputCustomMask,...
-    labelModels,filenameOutputModelledNppProcessed)
+    labelModels,filenameOutputModelledNppProcessed,logID)
+fclose(logID); 
  
 % =========================================================================
 %%

@@ -1,5 +1,5 @@
 function calculateGloballyIntegratedNpp(filenameInputModelledNpp,...
-    filenameInputCustomMask,labelModels,filenameOutputModelledNpp)
+    filenameInputCustomMask,labelModels,filenameOutputModelledNpp,logID)
 
 % CALCULATEGLOBALLYINTEGRATEDNPP Calculates globally integrated net primary
 % production (NPP) testing the effect of a gap-filling method.
@@ -35,8 +35,8 @@ function calculateGloballyIntegratedNpp(filenameInputModelledNpp,...
         load(fullfile('data','raw',filenameInputCustomMask),'mask','mask_lat','mask_lon')
 
         % Custom gap-filling method
-        nppGapFilled = fillGapsInSurfaceOceanForcing(nppGridOriginal,mask,...
-            npp_lat,npp_lon,mask_lat,mask_lon,(1:12)); 
+        nppGapFilled = manageGapsInOceanDataIceMasked(nppGridOriginal,mask,...
+            npp_lat,npp_lon,mask_lat,mask_lon,(1:12),logID); 
         
         % Process and integrate data for each method
         for iMethod = 1:nGapFillingMethods
@@ -60,6 +60,9 @@ function calculateGloballyIntegratedNpp(filenameInputModelledNpp,...
             globalNppStockSummary{counter} = sprintf('%s %s: %.0f Gt C/yr', ...
                 productName, label, globalNppStock);
             counter = counter + 1;
+            
+            % Log
+            fprintf(logID,'%s %s: %.0f Gt C/yr',productName,label,globalNppStock);
 
             % Save 3D data arrays in the output structure
             fieldName = [erase(productFileName, '.mat'), '_', label];

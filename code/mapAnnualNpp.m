@@ -6,9 +6,9 @@ function mapAnnualNpp(filenameModelledNpp,filenameModelledNppProcessed)
     load(fullfile('data','processed',filenameModelledNppProcessed),...
         'globalNppStockSummary','nppModelClimatologyStruct')
     
-    myColourScheme = [ones(1,3); jet(1000)];
-    caxismin = 0; % mg C m-2 d-2
-    caxismax = 1000; % mg C m-2 d-2
+    myColourMap = brewermap(1000,'*Spectral'); % Spectral is the equivalent of Jet
+    caxisMin = 0; % mg C m-2 d-2
+    caxisMax = 1000; % mg C m-2 d-2
     cbString = 'NPP (mg C m^{-2} d^{-1})';
     isCommonColourBar = true;
 
@@ -57,11 +57,11 @@ function mapAnnualNpp(filenameModelledNpp,filenameModelledNppProcessed)
     end % iModel
 
     % Plot the annual mean data for all methods using the custom plotting function
-    plotOceanVariableMaps(nppModelledAnnualMeanAll,qLon,qLat,myColourScheme,cbString,...
-        caxismin,caxismax,isCommonColourBar,globalNppStockSummary,'npp_annual_comp',[])
+    plotOceanVariableMaps(nppModelledAnnualMeanAll,qLon,qLat,myColourMap,cbString,...
+        caxisMin,caxisMax,isCommonColourBar,globalNppStockSummary,'npp_annual_comp',[])
 
     % Plot the annual mean data for gap-filled data using the custom plotting function
-    plotOceanVariableMaps(nppModelledAnnualMeanGapFilled,qLon,qLat,myColourScheme,cbString,...
-        caxismin,caxismax,isCommonColourBar,globalNppStockSummaryGapFilled,'npp_annual_gapfilled',[])
+    plotOceanVariableMaps(nppModelledAnnualMeanGapFilled,qLon,qLat,myColourMap,cbString,...
+        caxisMin,caxisMax,isCommonColourBar,globalNppStockSummaryGapFilled,'npp_annual_gapfilled',[])
 
 end % mapAnnualNpp

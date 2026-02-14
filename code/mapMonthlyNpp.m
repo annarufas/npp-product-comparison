@@ -6,9 +6,9 @@ function mapMonthlyNpp(filenameModelledNpp,filenameModelledNppProcessed)
     load(fullfile('data','processed',filenameModelledNppProcessed),...
         'globalNppStockSummary','nppModelClimatologyStruct')
 
-    myColourScheme = [ones(1,3); jet(1000)];
-    caxismin = 0; % mg C m-2 d-2
-    caxismax = 1000; % mg C m-2 d-2
+    myColourMap = brewermap(1000,'*Spectral'); % Spectral is the equivalent of Jet
+    caxisMin = 0; % mg C m-2 d-2
+    caxisMax = 1000; % mg C m-2 d-2
     cbString = 'NPP (mg C m^{-2} d^{-1})';
     isCommonColourBar = true;
     labelMonths = {'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'};
@@ -30,8 +30,8 @@ function mapMonthlyNpp(filenameModelledNpp,filenameModelledNppProcessed)
             % Plot the dataset for the current product and the current method
             iDataset = (iModel - 1)*nGapFillingMethods + iMethod;
             figureName = ['npp_monthly_',fileName,'_',label];
-            plotOceanVariableMaps(data,lon,lat,myColourScheme,cbString,caxismin,...
-                caxismax,isCommonColourBar,labelMonths,figureName,globalNppStockSummary{iDataset})
+            plotOceanVariableMaps(data,lon,lat,myColourMap,cbString,caxisMin,...
+                caxisMax,isCommonColourBar,labelMonths,figureName,globalNppStockSummary{iDataset})
 
         end % iMethod
     end % iModel
