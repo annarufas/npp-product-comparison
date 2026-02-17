@@ -1,7 +1,19 @@
 resources/external/*/
 README_cover.png
-figures/*.pdf
+
+# Ignore all PNGs in figures
+figures/*
+!figures/
+!figures/npp_annual_comp.png
+!figures/npp_annual_gapfilled.png
+!figures/npp_c14_vs_models.png
+!figures/npp_monthly_npp_bicep_gapfilled.png
+!figures/npp_monthly_npp_bicep_plain.png
+
+# Other ignores
 code/*.asv
+logs/
 data/processed/*.mat
 data/raw/*.mat
 .DS_Store
+
